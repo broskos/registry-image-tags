@@ -43,3 +43,10 @@ library/redis:8.0.0
 - **Registry Handling**: The script automatically concatenates the registry from the first line with each image path (e.g., `docker.io/library/alpine`).
 - **Semantic Versioning**: It uses `packaging.version` to ensure accurate comparisons (e.g., recognizing that `1.10.0` is newer than `1.2.0`).
 - **JSON Integration**: It interfaces with `skopeo list-tags` and parses the JSON output to retrieve the tag list safely.
+
+// ... existing code ...
+- **Semantic Versioning**: It uses `packaging.version` to ensure accurate comparisons (e.g., recognizing that `1.10.0` is newer than `1.2.0`).
+- **JSON Integration**: It interfaces with `skopeo list-tags` and parses the JSON output to retrieve the tag list safely.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
