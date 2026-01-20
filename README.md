@@ -39,12 +39,14 @@ library/alpine:3.15.0
 library/ubuntu:20.04
 library/redis:8.0.0
 ```
+### Authentication
+If your registry requires authentication, ensure you are logged in via `skopeo` or `podman` before running the script. The script uses your system's default credentials file (usually managed by `containers-auth.json`).
+
 ## Technical Details
 - **Registry Handling**: The script automatically concatenates the registry from the first line with each image path (e.g., `docker.io/library/alpine`).
 - **Semantic Versioning**: It uses `packaging.version` to ensure accurate comparisons (e.g., recognizing that `1.10.0` is newer than `1.2.0`).
 - **JSON Integration**: It interfaces with `skopeo list-tags` and parses the JSON output to retrieve the tag list safely.
 
-// ... existing code ...
 - **Semantic Versioning**: It uses `packaging.version` to ensure accurate comparisons (e.g., recognizing that `1.10.0` is newer than `1.2.0`).
 - **JSON Integration**: It interfaces with `skopeo list-tags` and parses the JSON output to retrieve the tag list safely.
 
