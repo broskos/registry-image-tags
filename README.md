@@ -47,8 +47,5 @@ If your registry requires authentication, ensure you are logged in via `skopeo` 
 - **Semantic Versioning**: It uses `packaging.version` to ensure accurate comparisons (e.g., recognizing that `1.10.0` is newer than `1.2.0`).
 - **JSON Integration**: It interfaces with `skopeo list-tags` and parses the JSON output to retrieve the tag list safely.
 
-- **Semantic Versioning**: It uses `packaging.version` to ensure accurate comparisons (e.g., recognizing that `1.10.0` is newer than `1.2.0`).
-- **JSON Integration**: It interfaces with `skopeo list-tags` and parses the JSON output to retrieve the tag list safely.
-
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
