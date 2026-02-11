@@ -1,11 +1,14 @@
 # OLM Catalog Bundle Parser
 
 A lightweight Python utility designed to parse OPM (Operator Package Manager) rendered catalogs. This tool identifies all entries with the olm.bundle schema and extracts their associated sha256 image digests.
-Prerequisites
+### Prerequisites
+
  * Python 3.x: Ensure you have Python installed on your system.
  * opm CLI: Required to extract the catalog metadata from your operator index image.
-Preparation
-Before running the parser, you must extract the contents of your local or remote index into a JSON format that the script can read.
+
+### Preparation
+
+Before running the parser, you must extract the contents of your local registry operator-index into a JSON format file that the script can read.
 Use the a modified copy of the following command to render the index metadata to a file named catalog.json:
 
 
@@ -15,7 +18,7 @@ subsitute your local registry, path and tag for the operator-index you want to p
 
 Note: Ensure the output file is named catalog.json and is located in the same directory as the script.
 
-### How to Run:
+### How to Run
  * Open your terminal or command prompt.
  * Navigate to the directory containing parser.py and catalog.json.
  * Execute the script:
