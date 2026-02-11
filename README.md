@@ -1,4 +1,3 @@
-Here is a README.md file tailored for your tool. It includes the preparation steps using the opm CLI and instructions for running your parser.py script.
 OLM Catalog Bundle Parser
 A lightweight Python utility designed to parse OPM (Operator Package Manager) rendered catalogs. This tool identifies all entries with the olm.bundle schema and extracts their associated sha256 image digests.
 Prerequisites
@@ -29,4 +28,3 @@ cluster-logging.v6.3.2                             | 56ee655fc9fd5aca984a7c552c0
 Troubleshooting
  * JSONDecodeError: If you receive an error regarding property names or double quotes, ensure that you used the opm render command correctly. The script is specifically designed to handle the multi-object JSON stream produced by opm.
  * FileNotFoundError: Ensure catalog.json is in the same folder as parser.py.
-Would you like me to add a section on how to export this output directly to a CSV file?
