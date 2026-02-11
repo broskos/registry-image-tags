@@ -14,14 +14,16 @@ Use the a modified copy of the following command to render the index metadata to
 subsitute your local registry, path and tag for the operator-index you want to parse
 
 Note: Ensure the output file is named catalog.json and is located in the same directory as the script.
-How to Run
+
+### How to Run:
  * Open your terminal or command prompt.
  * Navigate to the directory containing parser.py and catalog.json.
  * Execute the script:
 <!-- end list -->
-python parser.py
+```python parser.py```
 
-Expected Output
+### Expected Output
+
 The script will process the catalog and print a formatted table listing the bundle names and their corresponding SHA256 digests:
 ```
 BUNDLE NAME                                        | SHA256 DIGEST
