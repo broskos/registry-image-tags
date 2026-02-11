@@ -1,4 +1,0 @@
-docker.io
-library/alpine:3.15.0
-library/ubuntu:20.04
-library/redis:8.0.0
