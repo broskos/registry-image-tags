@@ -7,6 +7,7 @@ def parse_catalog(input_file):
     # Regex to capture exactly 64 characters of a hex sha256 digest
     digest_pattern = re.compile(r"sha256:([a-fA-F0-9]{64})")
     output_filename = "bundle_digests.txt"
+    bundles_list = []
     
     try:
         with open(input_file, 'r') as f:
@@ -14,17 +15,8 @@ def parse_catalog(input_file):
             
         decoder = json.JSONDecoder()
         pos = 0
-        found_bundles = 0
         
-        # Prepare the output content
-        header = f"{'BUNDLE NAME':<55} | {'SHA256 DIGEST'}"
-        separator = "-" * 125
-        output_lines = [header, separator]
-        
-        # Print to console for immediate feedback
-        print(header)
-        print(separator)
-        
+        # Phase 1: Parse and Collect
         while pos < len(content):
             content = content.lstrip()
             if not content:
@@ -41,31 +33,45 @@ def parse_catalog(input_file):
                     match = digest_pattern.search(image)
                     digest = match.group(1) if match else "No Digest Found"
                     
-                    line = f"{name:<55} | {digest}"
-                    print(line)
-                    output_lines.append(line)
-                    found_bundles += 1
+                    bundles_list.append((name, digest))
                 
                 content = content[end_pos:].lstrip()
                 pos = 0
             except json.JSONDecodeError:
                 break
         
-        summary = f"\nParsing complete. Total bundles found: {found_bundles}"
+        # Phase 2: Sort by Bundle Name (the first element in our tuple)
+        bundles_list.sort(key=lambda x: x[0].lower())
+
+        # Phase 3: Format Output
+        header = f"{'BUNDLE NAME':<55} | {'SHA256 DIGEST'}"
+        separator = "-" * 125
+        output_lines = [header, separator]
+        
+        # Print header to console
+        print(header)
+        print(separator)
+        
+        for name, digest in bundles_list:
+            line = f"{name:<55} | {digest}"
+            print(line)
+            output_lines.append(line)
+            
+        summary = f"\nParsing complete. Total bundles found: {len(bundles_list)}"
         print(summary)
         output_lines.append(summary)
 
         # Write to file
         with open(output_filename, 'w') as out_file:
             out_file.write("\n".join(output_lines))
-        print(f"Results have been saved to: {output_filename}")
+        print(f"Sorted results have been saved to: {output_filename}")
 
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found.")
         sys.exit(1)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Parse OLM catalog for bundle digests.")
+    parser = argparse.ArgumentParser(description="Parse OLM catalog for bundle digests sorted by name.")
     parser.add_argument("-f", "--file", default="catalog.json", help="Input JSON file (default: catalog.json)")
     args = parser.parse_args()
     
