@@ -1,6 +1,7 @@
 # OLM Catalog Bundle Parser
 
-A lightweight Python utility designed to parse OPM (Operator Package Manager) rendered catalogs. This tool identifies all entries with the olm.bundle schema and extracts their associated sha256 image digests.
+A Python utility designed to parse OPM (Operator Package Manager) rendered catalogs. This tool scans the catalog for entries with the olm.bundle schema, extracts the sha256 image digests, and saves the results to a local text file.
+
 ### Prerequisites
 
  * Python 3.x: Ensure you have Python installed on your system.
@@ -14,9 +15,9 @@ Use the a modified copy of the following command to render the index metadata to
 
 ```opm render rhel9.lktc7.internal:8443/redhat/redhat-operator-index:v4.18 -o json > catalog.json```
 
-subsitute your local registry, path and tag for the operator-index you want to parse
+Subsitute your local registry, path and tag for the operator-index you want to parse.
 
-Note: Ensure the output file is named catalog.json and is located in the same directory as the script.
+This command saves the metadata from the v4.18 index to a file named catalog.json in your current directory.
 
 ### How to Run
  * Open your terminal or command prompt.
@@ -25,18 +26,25 @@ Note: Ensure the output file is named catalog.json and is located in the same di
 <!-- end list -->
 ```python parser.py```
 
+#### Options
+If your rendered file has a different name you can specify on the command line:
+```
+python parser.py -f your-filename.json
+```
 ### Expected Output
+The script provides feedback in the terminal and automatically generates a file named bundle_digests.txt containing the results:
 
-The script will process the catalog and print a formatted table listing the bundle names and their corresponding SHA256 digests:
 ```
-BUNDLE NAME                                        | SHA256 DIGEST
----------------------------------------------------------------------------------------------------------------------
-advanced-cluster-management.v2.14.1                | dd4a7678648872ea4294b867cdc7bca0ac063b81eaeac9bf5d4fddcaffb96bac
-advanced-cluster-management.v2.15.1                | b6506d0e18ee16259c56ae0afcb0db85b854dab69ed420722c928a28e3d0e2dd
-cluster-logging.v6.3.2                             | 56ee655fc9fd5aca984a7c552c00112b7314d2e79117f58c469ef91f3cefe640
+BUNDLE NAME                                             | SHA256 DIGEST
+-----------------------------------------------------------------------------------------------------------------------------
+advanced-cluster-management.v2.14.1                     | dd4a7678648872ea4294b867cdc7bca0ac063b81eaeac9bf5d4fddcaffb96bac
+cluster-logging.v6.4.2                                  | 442e8ca696eb526c0a933d260d1f50a5d45d57427116f0210f440ac7f1135573
 ...
+
+Parsing complete. Total bundles found: 12
+
 ```
 
-Troubleshooting
+### Troubleshooting
  * JSONDecodeError: If you receive an error regarding property names or double quotes, ensure that you used the opm render command correctly. The script is specifically designed to handle the multi-object JSON stream produced by opm.
  * FileNotFoundError: Ensure catalog.json is in the same folder as parser.py.
